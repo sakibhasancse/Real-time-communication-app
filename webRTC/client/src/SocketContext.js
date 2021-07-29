@@ -64,12 +64,23 @@ const ContextProvider = ({ children }) => {
 
         socket.on('callaccepted', (signal) => {
             setCallAccepted(true)
+
+            peer.signal(true);
         });
 
-        setCallEnded(true);
+        connectionRef.current = peer;
     }
 
     const leaveCall = () => {
-
+        setCallEnded(true);
+        connectionRef.current.destroy();
+        window.location.reload()
     }
+    <SocketContext.Provider value={{
+        call, callAccepted, callEnded, name, me, myVideo, userVideo, connectionRef, streasetName, callUser, leaveCall, answerCall
+    }} >
+        {children}
+    </SocketContext.Provider>
 }
+
+export { ContextProvider, SocketContext }
