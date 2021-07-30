@@ -1,6 +1,5 @@
-const express = require('express');
-const app = express();
-const server = require('http')(app);
+const app = require('express')();
+const server = require('http').createServer(app);
 const cors = require('cors');
 const io = require('socket.io')(server, {
     cors: {
@@ -28,6 +27,6 @@ io.on('connection', (socket) => {
     })
 })
 
-server.listen(3000, () => {
-    console.log('Server listening on port 3000');
+server.listen(5000, () => {
+    console.log('Server listening on port 5000');
 })

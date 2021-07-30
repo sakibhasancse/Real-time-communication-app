@@ -1,5 +1,5 @@
 import React from 'react';
 import App from './App';
 import ReactDOM from 'react-dom';
-
-ReactDOM.render(<App />, document.getElementById('root'))
+import { ContextProvider } from './SocketContext'
+ReactDOM.render(<ContextProvider><App /></ContextProvider>, document.getElementById('root'))
