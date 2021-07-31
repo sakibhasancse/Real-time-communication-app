@@ -10,22 +10,28 @@ const io = require('socket.io')(server, {
 
 app.use(cors());
 
-io.on('connection', (socket) => {
-    console.log.log(socket)
-    socket.emit('connection', socket.id);
+try {
+    io.on('connection', (socket) => {
+        console.log(socket.id)
+        socket.emit("me", socket.id);
 
-    socket.on('desconnect', () => {
-        socket.broadcast.emit('callended');
-    })
+        socket.on('disconnect', () => {
+            socket.broadcast.emit('callEnded');
+        })
 
-    socket.on('calluser', ({ userToCall, signalData, from, name }) => {
-        io.to(userToCall).emit('calluser', { userToCall, signalData, from, name })
-    })
+        socket.on('callUser', ({ userToCall, signalData, from, name }) => {
+            io.to(userToCall).emit('callUser', { signal: signalData, from, name });
+        })
 
-    socket.on('answercall', (data) => {
-        io.to(data.to).emit('callaccepted', data.signal)
+        socket.on('answerCall', (data) => {
+            io.to(data.to).emit('callAccepted', data.signal)
+        })
+
     })
-})
+} catch (error) {
+    console.log(error)
+}
+
 
 server.listen(5000, () => {
     console.log('Server listening on port 5000');
