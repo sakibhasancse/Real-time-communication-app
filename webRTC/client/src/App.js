@@ -5,7 +5,6 @@ import Options from './components/Options';
 import Notifications from './components/Notifications';
 import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles((theme) => ({
-
     image: {
         marginLeft: '15px',
     },
@@ -19,7 +18,6 @@ const useStyles = makeStyles((theme) => ({
 
 const App = () => {
     const classes = useStyles();
-
     return (
         <div className={classes.wrapper}>
             <AppBar position="static" color="inherit">

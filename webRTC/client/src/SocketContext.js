@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect, createContext } from 'react';
 import { io } from 'socket.io-client';
 import Peer from 'simple-peer';
-import { Alert } from '@material-ui/core'
 
 const SocketContext = createContext();
 
@@ -29,7 +28,8 @@ const ContextProvider = ({ children }) => {
                     myVideo.current.srcObject = currentStream;
                 });
         } catch (error) {
-            document.getElementById('info').append(<Alert severity="warning">This is a warning alert — check it out!</Alert>)
+            // document.getElementById('info').append(<Alert severity="warning">This is a warning alert — check it out!</Alert>)
+            alert(error.message);
         }
 
         socket.on('me', (id) => setMe(id));
